@@ -1,20 +1,49 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Podcast Decoded
 
-# Run and deploy your AI Studio app
+Podcast Decoded is a Vite + React application that surfaces AI-generated summaries of long-form podcast episodes. The goal for Sprint 1 was to replace mock content with a real Supabase-backed data layer, enable routing, and make the landing page fully dynamic.
 
-This contains everything you need to run your app locally.
+## Getting Started
 
-View your app in AI Studio: https://ai.studio/apps/drive/1jJ709Go28wTeypJkOvMknLWje9AeZ_Qe
+```bash
+npm install
+npm run dev
+```
 
-## Run Locally
+The app runs on `http://localhost:3000/`.
 
-**Prerequisites:**  Node.js
+### Environment Variables
 
+Create `.env.local` with:
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+```
+VITE_SUPABASE_URL=...
+VITE_SUPABASE_ANON_KEY=...
+```
+
+These values are supplied by your Supabase project.
+
+### Supabase CLI
+
+Migrations live in `supabase/migrations`. Push updates with:
+
+```bash
+./bin/supabase db push
+```
+
+The most recent migration enables anonymous read access to the `episodes` table so the browser can fetch content with the anon key.
+
+## Current Functionality
+
+- Fully routed experience (`/`, `/browse`, `/episode/:id`, `/category/:category`, `/request`).
+- Supabase-powered API layer with typed helpers under `lib/api.ts`.
+- Dynamic landing page sections (recent episodes, categories, stats) with loading and error states.
+- Browse page with pagination, sorting, category filter, and search query string support.
+- Episode detail page with full summary, notes, resources, and related episodes.
+
+## Future Work
+
+- Wire `/request` form to the `requests` table with proper RLS.
+- Populate "Popular This Week" and "Trending Topics" from analytics instead of static mocks.
+- Add admin tools for creating/editing episodes (Sprint 3).
+
+Happy decoding!

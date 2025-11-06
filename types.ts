@@ -1,5 +1,5 @@
 export interface Episode {
-  id: number;
+  id: string;
   podcastTitle: string;
   episodeTitle: string;
   guestName: string;
